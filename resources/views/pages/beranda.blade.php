@@ -79,6 +79,86 @@ $config = [
     }
     .lightbox-close { position: fixed; top: 24px; right: 24px; width: 48px; height: 48px; background: rgba(255,255,255,0.15); backdrop-filter: blur(8px); border: none; border-radius: 50%; color: white; font-size: 22px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; z-index: 10000; }
     .lightbox-close:hover { background: rgba(255,255,255,0.3); transform: scale(1.1); }
+
+    .modal-overlay {
+        display: none;
+        position: fixed;
+        z-index: 9999;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.7);
+        backdrop-filter: blur(4px);
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+    }
+    .modal-overlay.active {
+        display: flex;
+    }
+    .modal-box {
+        background: white;
+        max-width: 700px;
+        width: 100%;
+        max-height: 90vh;
+        border-radius: 24px;
+        padding: 40px;
+        position: relative;
+        box-shadow: 0 30px 80px rgba(0,0,0,0.3);
+        overflow-y: auto;
+        animation: modalIn 0.3s ease-out;
+    }
+    @keyframes modalIn {
+        from { opacity: 0; transform: scale(0.95) translateY(10px); }
+        to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    .modal-close-btn {
+        position: absolute;
+        top: 16px;
+        right: 16px;
+        width: 40px;
+        height: 40px;
+        background: #f3f4f6;
+        border: none;
+        border-radius: 50%;
+        color: #374151;
+        font-size: 18px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+    }
+    .modal-close-btn:hover {
+        background: #e5e7eb;
+        transform: rotate(90deg);
+    }
+    .modal-icon-wrap {
+        width: 64px;
+        height: 64px;
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 20px;
+    }
+    .modal-icon-wrap i {
+        font-size: 28px;
+        color: white;
+    }
+    .modal-feature {
+        display: flex;
+        gap: 14px;
+        padding: 14px 18px;
+        background: #f9fafb;
+        border-radius: 14px;
+        transition: all 0.3s ease;
+    }
+    .modal-feature:hover {
+        background: #f0fdf4;
+        transform: translateX(4px);
+    }
 </style>
 @endpush
 
@@ -126,6 +206,39 @@ document.addEventListener('DOMContentLoaded', function() {
         var lightbox = document.getElementById('lightbox');
         if(!lightbox || !lightbox.classList.contains('active')) return;
         if (e.key === 'Escape') window.closeLightbox();
+    });
+
+    window.openModal = function(type) {
+        var modal = document.getElementById('modal-' + type);
+        if (modal) {
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+    };
+
+    window.closeModal = function(type) {
+        var modal = document.getElementById('modal-' + type);
+        if (modal) {
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+    };
+
+    window.closeAllModals = function() {
+        document.querySelectorAll('.modal-overlay').forEach(function(el) {
+            el.classList.remove('active');
+        });
+        document.body.style.overflow = 'auto';
+    };
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            var openModal = document.querySelector('.modal-overlay.active');
+            if (openModal) {
+                openModal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        }
     });
 });
 </script>
@@ -280,7 +393,7 @@ document.addEventListener('DOMContentLoaded', function() {
         </div>
         
         <div class="grid md:grid-cols-3 gap-8">
-            <div class="bg-white rounded-3xl p-8 shadow-lg border border-gray-100 card-hover group relative overflow-hidden">
+            <div onclick="openModal('survey')" class="bg-white rounded-3xl p-8 shadow-lg border border-gray-100 card-hover group relative overflow-hidden cursor-pointer">
                 <div class="absolute top-0 right-0 w-20 h-20 bg-mangrove-50 rounded-full -translate-y-1/2 translate-x-1/2 group-hover:scale-150 smooth-transition"></div>
                 <div class="relative z-10">
                     <div class="w-16 h-16 bg-gradient-to-br from-mangrove-500 to-mangrove-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 smooth-transition">
@@ -295,13 +408,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 </div>
             </div>
             
-            <div class="bg-white rounded-3xl p-8 shadow-lg border border-gray-100 card-hover group relative overflow-hidden">
+            <div onclick="openModal('penanaman')" class="bg-white rounded-3xl p-8 shadow-lg border border-gray-100 card-hover group relative overflow-hidden cursor-pointer">
                 <div class="absolute top-0 right-0 w-20 h-20 bg-ocean-50 rounded-full -translate-y-1/2 translate-x-1/2 group-hover:scale-150 smooth-transition"></div>
                 <div class="relative z-10">
                     <div class="w-16 h-16 bg-gradient-to-br from-ocean-500 to-ocean-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 smooth-transition">
                         <i class="fas fa-seedling text-2xl text-white"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-4">Penanaan Mangrove</h3>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Penanaman Mangrove</h3>
                     <p class="text-gray-600 text-sm leading-relaxed">Pelaksanaan penanaman mangrove dengan teknik yang tepat, menggunakan spesies lokal dan perencanaan komprehensif.</p>
                     <div class="mt-6 flex items-center text-ocean-600 font-medium text-sm group-hover:gap-3 gap-2 smooth-transition">
                         <span>Selengkapnya</span>
@@ -310,7 +423,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 </div>
             </div>
             
-            <div class="bg-white rounded-3xl p-8 shadow-lg border border-gray-100 card-hover group relative overflow-hidden">
+            <div onclick="openModal('monitoring')" class="bg-white rounded-3xl p-8 shadow-lg border border-gray-100 card-hover group relative overflow-hidden cursor-pointer">
                 <div class="absolute top-0 right-0 w-20 h-20 bg-teal-50 rounded-full -translate-y-1/2 translate-x-1/2 group-hover:scale-150 smooth-transition"></div>
                 <div class="relative z-10">
                     <div class="w-16 h-16 bg-gradient-to-br from-teal-500 to-teal-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 smooth-transition">
@@ -415,6 +528,109 @@ document.addEventListener('DOMContentLoaded', function() {
     </button>
     <img id="lightbox-img" class="lightbox-content" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Gambar" onclick="event.stopPropagation();" style="display:none;">
 </div>
+
+<!-- Modal Survey & Perencanaan -->
+<div id="modal-survey" class="modal-overlay" onclick="if(event.target===this)closeModal('survey')">
+    <div class="modal-box">
+        <button class="modal-close-btn" onclick="closeModal('survey')" aria-label="Tutup"><i class="fas fa-times"></i></button>
+        <div class="modal-icon-wrap" style="background: linear-gradient(135deg, #15803d, #166534);">
+            <i class="fas fa-clipboard-list"></i>
+        </div>
+        <h3 class="text-2xl font-bold text-gray-900 mb-3">Survey & Perencanaan</h3>
+        <p class="text-gray-600 mb-6 leading-relaxed">Layanan survey dan perencanaan kami mencakup analisis menyeluruh untuk memastikan keberhasilan proyek konservasi mangrove Anda.</p>
+        <div class="space-y-3">
+            <div class="modal-feature">
+                <div class="w-8 h-8 bg-mangrove-100 rounded-lg flex items-center justify-center flex-shrink-0"><i class="fas fa-map-marked-alt text-mangrove-600"></i></div>
+                <div><h4 class="font-semibold text-gray-900">Survei Lokasi & Pemetaan</h4><p class="text-sm text-gray-500">Pemetaan topografi detail dan identifikasi karakteristik lahan untuk menentukan kesesuaian area penanaman.</p></div>
+            </div>
+            <div class="modal-feature">
+                <div class="w-8 h-8 bg-mangrove-100 rounded-lg flex items-center justify-center flex-shrink-0"><i class="fas fa-flask text-mangrove-600"></i></div>
+                <div><h4 class="font-semibold text-gray-900">Analisis Kelayakan</h4><p class="text-sm text-gray-500">Studi kelayakan lingkungan dan sosial untuk memastikan proyek berkelanjutan dan berdampak positif.</p></div>
+            </div>
+            <div class="modal-feature">
+                <div class="w-8 h-8 bg-mangrove-100 rounded-lg flex items-center justify-center flex-shrink-0"><i class="fas fa-file-alt text-mangrove-600"></i></div>
+                <div><h4 class="font-semibold text-gray-900">Rencana Pengelolaan</h4><p class="text-sm text-gray-500">Penyusunan dokumen rencana pengelolaan mangrove terpadu yang komprehensif dan adaptif.</p></div>
+            </div>
+            <div class="modal-feature">
+                <div class="w-8 h-8 bg-mangrove-100 rounded-lg flex items-center justify-center flex-shrink-0"><i class="fas fa-users text-mangrove-600"></i></div>
+                <div><h4 class="font-semibold text-gray-900">Pemetaan Partisipatif</h4><p class="text-sm text-gray-500">Melibatkan masyarakat lokal dalam pemetaan dan perencanaan untuk memastikan keberlanjutan proyek.</p></div>
+            </div>
+            <div class="modal-feature">
+                <div class="w-8 h-8 bg-mangrove-100 rounded-lg flex items-center justify-center flex-shrink-0"><i class="fas fa-chart-bar text-mangrove-600"></i></div>
+                <div><h4 class="font-semibold text-gray-900">Studi Dampak Lingkungan</h4><p class="text-sm text-gray-500">Analisis dampak lingkungan (AMDAL) untuk meminimalkan risiko dan memaksimalkan manfaat ekologis.</p></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Penanaman Mangrove -->
+<div id="modal-penanaman" class="modal-overlay" onclick="if(event.target===this)closeModal('penanaman')">
+    <div class="modal-box">
+        <button class="modal-close-btn" onclick="closeModal('penanaman')" aria-label="Tutup"><i class="fas fa-times"></i></button>
+        <div class="modal-icon-wrap" style="background: linear-gradient(135deg, #0d9488, #0f766e);">
+            <i class="fas fa-seedling"></i>
+        </div>
+        <h3 class="text-2xl font-bold text-gray-900 mb-3">Penanaman Mangrove</h3>
+        <p class="text-gray-600 mb-6 leading-relaxed">Kami melaksanakan penanaman mangrove dengan teknik terbaik dan spesies lokal yang tepat untuk memastikan pertumbuhan optimal.</p>
+        <div class="space-y-3">
+            <div class="modal-feature">
+                <div class="w-8 h-8 bg-ocean-100 rounded-lg flex items-center justify-center flex-shrink-0"><i class="fas fa-leaf text-ocean-600"></i></div>
+                <div><h4 class="font-semibold text-gray-900">Pemilihan Spesies Lokal</h4><p class="text-sm text-gray-500">Menggunakan spesies mangrove asli yang sesuai dengan karakteristik ekologis lokasi penanaman.</p></div>
+            </div>
+            <div class="modal-feature">
+                <div class="w-8 h-8 bg-ocean-100 rounded-lg flex items-center justify-center flex-shrink-0"><i class="fas fa-seedling text-ocean-600"></i></div>
+                <div><h4 class="font-semibold text-gray-900">Pembibitan & Persiapan Lahan</h4><p class="text-sm text-gray-500">Pembibitan berkualitas tinggi dan persiapan lahan yang matang sebelum pelaksanaan penanaman.</p></div>
+            </div>
+            <div class="modal-feature">
+                <div class="w-8 h-8 bg-ocean-100 rounded-lg flex items-center justify-center flex-shrink-0"><i class="fas fa-tools text-ocean-600"></i></div>
+                <div><h4 class="font-semibold text-gray-900">Teknik Penanaman Tepat</h4><p class="text-sm text-gray-500">Penerapan teknik penanaman yang sesuai dengan kondisi lahan, pasang surut, dan jenis substrat.</p></div>
+            </div>
+            <div class="modal-feature">
+                <div class="w-8 h-8 bg-ocean-100 rounded-lg flex items-center justify-center flex-shrink-0"><i class="fas fa-hand-holding-heart text-ocean-600"></i></div>
+                <div><h4 class="font-semibold text-gray-900">Pelibatan Masyarakat</h4><p class="text-sm text-gray-500">Pelibatan aktif masyarakat lokal dalam proses penanaman untuk membangun rasa kepemilikan dan keberlanjutan.</p></div>
+            </div>
+            <div class="modal-feature">
+                <div class="w-8 h-8 bg-ocean-100 rounded-lg flex items-center justify-center flex-shrink-0"><i class="fas fa-ruler-combined text-ocean-600"></i></div>
+                <div><h4 class="font-semibold text-gray-900">Sistem Jarak Tanam</h4><p class="text-sm text-gray-500">Pengaturan jarak tanam yang optimal berdasarkan jenis spesies dan karakteristik lahan untuk pertumbuhan maksimal.</p></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Monitoring & Pemeliharaan -->
+<div id="modal-monitoring" class="modal-overlay" onclick="if(event.target===this)closeModal('monitoring')">
+    <div class="modal-box">
+        <button class="modal-close-btn" onclick="closeModal('monitoring')" aria-label="Tutup"><i class="fas fa-times"></i></button>
+        <div class="modal-icon-wrap" style="background: linear-gradient(135deg, #0d9488, #0f766e);">
+            <i class="fas fa-chart-line"></i>
+        </div>
+        <h3 class="text-2xl font-bold text-gray-900 mb-3">Monitoring & Pemeliharaan</h3>
+        <p class="text-gray-600 mb-6 leading-relaxed">Kami menyediakan layanan monitoring dan pemeliharaan berkelanjutan untuk memastikan keberhasilan proyek konservasi mangrove jangka panjang.</p>
+        <div class="space-y-3">
+            <div class="modal-feature">
+                <div class="w-8 h-8 bg-teal-100 rounded-lg flex items-center justify-center flex-shrink-0"><i class="fas fa-search text-teal-600"></i></div>
+                <div><h4 class="font-semibold text-gray-900">Pemantauan Berkala</h4><p class="text-sm text-gray-500">Pemantauan pertumbuhan dan kesehatan mangrove secara rutin dengan metode ilmiah yang terstandarisasi.</p></div>
+            </div>
+            <div class="modal-feature">
+                <div class="w-8 h-8 bg-teal-100 rounded-lg flex items-center justify-center flex-shrink-0"><i class="fas fa-hand-sparkles text-teal-600"></i></div>
+                <div><h4 class="font-semibold text-gray-900">Perawatan & Penyulaman</h4><p class="text-sm text-gray-500">Perawatan intensif dan penyulaman tanaman yang tidak tumbuh untuk memastikan tingkat keberhasilan tinggi.</p></div>
+            </div>
+            <div class="modal-feature">
+                <div class="w-8 h-8 bg-teal-100 rounded-lg flex items-center justify-center flex-shrink-0"><i class="fas fa-clipboard-check text-teal-600"></i></div>
+                <div><h4 class="font-semibold text-gray-900">Evaluasi Keberhasilan</h4><p class="text-sm text-gray-500">Evaluasi menyeluruh terhadap indikator keberhasilan proyek termasuk tingkat hidup, pertumbuhan, dan dampak ekologis.</p></div>
+            </div>
+            <div class="modal-feature">
+                <div class="w-8 h-8 bg-teal-100 rounded-lg flex items-center justify-center flex-shrink-0"><i class="fas fa-file-signature text-teal-600"></i></div>
+                <div><h4 class="font-semibold text-gray-900">Pelaporan Dampak</h4><p class="text-sm text-gray-500">Penyusunan laporan berkala mengenai dampak lingkungan, sosial, dan ekonomi dari proyek konservasi.</p></div>
+            </div>
+            <div class="modal-feature">
+                <div class="w-8 h-8 bg-teal-100 rounded-lg flex items-center justify-center flex-shrink-0"><i class="fas fa-people-arrows text-teal-600"></i></div>
+                <div><h4 class="font-semibold text-gray-900">Pemberdayaan Masyarakat</h4><p class="text-sm text-gray-500">Pelatihan dan pemberdayaan masyarakat lokal dalam perawatan mangrove untuk keberlanjutan jangka panjang.</p></div>
+            </div>
+        </div>
+    </div>
+</div>
+
 @endsection
 
 @section('content')
@@ -563,7 +779,7 @@ document.addEventListener('DOMContentLoaded', function() {
         </div>
         
         <div class="grid md:grid-cols-3 gap-8">
-            <div class="bg-white rounded-3xl p-8 shadow-lg border border-gray-100 card-hover group">
+            <div onclick="openModal('survey')" class="bg-white rounded-3xl p-8 shadow-lg border border-gray-100 card-hover group cursor-pointer">
                 <div class="w-16 h-16 bg-gradient-to-br from-mangrove-500 to-mangrove-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 smooth-transition">
                     <i class="fas fa-clipboard-list text-2xl text-white"></i>
                 </div>
@@ -577,11 +793,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 </div>
             </div>
             
-            <div class="bg-white rounded-3xl p-8 shadow-lg border border-gray-100 card-hover group">
+            <div onclick="openModal('penanaman')" class="bg-white rounded-3xl p-8 shadow-lg border border-gray-100 card-hover group cursor-pointer">
                 <div class="w-16 h-16 bg-gradient-to-br from-ocean-500 to-ocean-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 smooth-transition">
                     <i class="fas fa-seedling text-2xl text-white"></i>
                 </div>
-                <h3 class="text-xl font-bold text-gray-900 mb-4">Penanaan Mangrove</h3>
+                <h3 class="text-xl font-bold text-gray-900 mb-4">Penanaman Mangrove</h3>
                 <p class="text-gray-600 text-sm leading-relaxed">
                     Pelaksanaan penanaman mangrove dengan teknik yang tepat, menggunakan spesies lokal dan perencanaan yang komprehensif.
                 </p>
@@ -591,7 +807,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 </div>
             </div>
             
-            <div class="bg-white rounded-3xl p-8 shadow-lg border border-gray-100 card-hover group">
+            <div onclick="openModal('monitoring')" class="bg-white rounded-3xl p-8 shadow-lg border border-gray-100 card-hover group cursor-pointer">
                 <div class="w-16 h-16 bg-gradient-to-br from-teal-500 to-teal-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 smooth-transition">
                     <i class="fas fa-chart-line text-2xl text-white"></i>
                 </div>
@@ -633,4 +849,106 @@ document.addEventListener('DOMContentLoaded', function() {
         </div>
     </div>
 </section>
+
+<!-- Modal Survey & Perencanaan -->
+<div id="modal-survey" class="modal-overlay" onclick="if(event.target===this)closeModal('survey')">
+    <div class="modal-box">
+        <button class="modal-close-btn" onclick="closeModal('survey')" aria-label="Tutup"><i class="fas fa-times"></i></button>
+        <div class="modal-icon-wrap" style="background: linear-gradient(135deg, #15803d, #166534);">
+            <i class="fas fa-clipboard-list"></i>
+        </div>
+        <h3 class="text-2xl font-bold text-gray-900 mb-3">Survey & Perencanaan</h3>
+        <p class="text-gray-600 mb-6 leading-relaxed">Layanan survey dan perencanaan kami mencakup analisis menyeluruh untuk memastikan keberhasilan proyek konservasi mangrove Anda.</p>
+        <div class="space-y-3">
+            <div class="modal-feature">
+                <div class="w-8 h-8 bg-mangrove-100 rounded-lg flex items-center justify-center flex-shrink-0"><i class="fas fa-map-marked-alt text-mangrove-600"></i></div>
+                <div><h4 class="font-semibold text-gray-900">Survei Lokasi & Pemetaan</h4><p class="text-sm text-gray-500">Pemetaan topografi detail dan identifikasi karakteristik lahan untuk menentukan kesesuaian area penanaman.</p></div>
+            </div>
+            <div class="modal-feature">
+                <div class="w-8 h-8 bg-mangrove-100 rounded-lg flex items-center justify-center flex-shrink-0"><i class="fas fa-flask text-mangrove-600"></i></div>
+                <div><h4 class="font-semibold text-gray-900">Analisis Kelayakan</h4><p class="text-sm text-gray-500">Studi kelayakan lingkungan dan sosial untuk memastikan proyek berkelanjutan dan berdampak positif.</p></div>
+            </div>
+            <div class="modal-feature">
+                <div class="w-8 h-8 bg-mangrove-100 rounded-lg flex items-center justify-center flex-shrink-0"><i class="fas fa-file-alt text-mangrove-600"></i></div>
+                <div><h4 class="font-semibold text-gray-900">Rencana Pengelolaan</h4><p class="text-sm text-gray-500">Penyusunan dokumen rencana pengelolaan mangrove terpadu yang komprehensif dan adaptif.</p></div>
+            </div>
+            <div class="modal-feature">
+                <div class="w-8 h-8 bg-mangrove-100 rounded-lg flex items-center justify-center flex-shrink-0"><i class="fas fa-users text-mangrove-600"></i></div>
+                <div><h4 class="font-semibold text-gray-900">Pemetaan Partisipatif</h4><p class="text-sm text-gray-500">Melibatkan masyarakat lokal dalam pemetaan dan perencanaan untuk memastikan keberlanjutan proyek.</p></div>
+            </div>
+            <div class="modal-feature">
+                <div class="w-8 h-8 bg-mangrove-100 rounded-lg flex items-center justify-center flex-shrink-0"><i class="fas fa-chart-bar text-mangrove-600"></i></div>
+                <div><h4 class="font-semibold text-gray-900">Studi Dampak Lingkungan</h4><p class="text-sm text-gray-500">Analisis dampak lingkungan (AMDAL) untuk meminimalkan risiko dan memaksimalkan manfaat ekologis.</p></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Penanaman Mangrove -->
+<div id="modal-penanaman" class="modal-overlay" onclick="if(event.target===this)closeModal('penanaman')">
+    <div class="modal-box">
+        <button class="modal-close-btn" onclick="closeModal('penanaman')" aria-label="Tutup"><i class="fas fa-times"></i></button>
+        <div class="modal-icon-wrap" style="background: linear-gradient(135deg, #0d9488, #0f766e);">
+            <i class="fas fa-seedling"></i>
+        </div>
+        <h3 class="text-2xl font-bold text-gray-900 mb-3">Penanaman Mangrove</h3>
+        <p class="text-gray-600 mb-6 leading-relaxed">Kami melaksanakan penanaman mangrove dengan teknik terbaik dan spesies lokal yang tepat untuk memastikan pertumbuhan optimal.</p>
+        <div class="space-y-3">
+            <div class="modal-feature">
+                <div class="w-8 h-8 bg-ocean-100 rounded-lg flex items-center justify-center flex-shrink-0"><i class="fas fa-leaf text-ocean-600"></i></div>
+                <div><h4 class="font-semibold text-gray-900">Pemilihan Spesies Lokal</h4><p class="text-sm text-gray-500">Menggunakan spesies mangrove asli yang sesuai dengan karakteristik ekologis lokasi penanaman.</p></div>
+            </div>
+            <div class="modal-feature">
+                <div class="w-8 h-8 bg-ocean-100 rounded-lg flex items-center justify-center flex-shrink-0"><i class="fas fa-seedling text-ocean-600"></i></div>
+                <div><h4 class="font-semibold text-gray-900">Pembibitan & Persiapan Lahan</h4><p class="text-sm text-gray-500">Pembibitan berkualitas tinggi dan persiapan lahan yang matang sebelum pelaksanaan penanaman.</p></div>
+            </div>
+            <div class="modal-feature">
+                <div class="w-8 h-8 bg-ocean-100 rounded-lg flex items-center justify-center flex-shrink-0"><i class="fas fa-tools text-ocean-600"></i></div>
+                <div><h4 class="font-semibold text-gray-900">Teknik Penanaman Tepat</h4><p class="text-sm text-gray-500">Penerapan teknik penanaman yang sesuai dengan kondisi lahan, pasang surut, dan jenis substrat.</p></div>
+            </div>
+            <div class="modal-feature">
+                <div class="w-8 h-8 bg-ocean-100 rounded-lg flex items-center justify-center flex-shrink-0"><i class="fas fa-hand-holding-heart text-ocean-600"></i></div>
+                <div><h4 class="font-semibold text-gray-900">Pelibatan Masyarakat</h4><p class="text-sm text-gray-500">Pelibatan aktif masyarakat lokal dalam proses penanaman untuk membangun rasa kepemilikan dan keberlanjutan.</p></div>
+            </div>
+            <div class="modal-feature">
+                <div class="w-8 h-8 bg-ocean-100 rounded-lg flex items-center justify-center flex-shrink-0"><i class="fas fa-ruler-combined text-ocean-600"></i></div>
+                <div><h4 class="font-semibold text-gray-900">Sistem Jarak Tanam</h4><p class="text-sm text-gray-500">Pengaturan jarak tanam yang optimal berdasarkan jenis spesies dan karakteristik lahan untuk pertumbuhan maksimal.</p></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Monitoring & Pemeliharaan -->
+<div id="modal-monitoring" class="modal-overlay" onclick="if(event.target===this)closeModal('monitoring')">
+    <div class="modal-box">
+        <button class="modal-close-btn" onclick="closeModal('monitoring')" aria-label="Tutup"><i class="fas fa-times"></i></button>
+        <div class="modal-icon-wrap" style="background: linear-gradient(135deg, #0d9488, #0f766e);">
+            <i class="fas fa-chart-line"></i>
+        </div>
+        <h3 class="text-2xl font-bold text-gray-900 mb-3">Monitoring & Pemeliharaan</h3>
+        <p class="text-gray-600 mb-6 leading-relaxed">Kami menyediakan layanan monitoring dan pemeliharaan berkelanjutan untuk memastikan keberhasilan proyek konservasi mangrove jangka panjang.</p>
+        <div class="space-y-3">
+            <div class="modal-feature">
+                <div class="w-8 h-8 bg-teal-100 rounded-lg flex items-center justify-center flex-shrink-0"><i class="fas fa-search text-teal-600"></i></div>
+                <div><h4 class="font-semibold text-gray-900">Pemantauan Berkala</h4><p class="text-sm text-gray-500">Pemantauan pertumbuhan dan kesehatan mangrove secara rutin dengan metode ilmiah yang terstandarisasi.</p></div>
+            </div>
+            <div class="modal-feature">
+                <div class="w-8 h-8 bg-teal-100 rounded-lg flex items-center justify-center flex-shrink-0"><i class="fas fa-hand-sparkles text-teal-600"></i></div>
+                <div><h4 class="font-semibold text-gray-900">Perawatan & Penyulaman</h4><p class="text-sm text-gray-500">Perawatan intensif dan penyulaman tanaman yang tidak tumbuh untuk memastikan tingkat keberhasilan tinggi.</p></div>
+            </div>
+            <div class="modal-feature">
+                <div class="w-8 h-8 bg-teal-100 rounded-lg flex items-center justify-center flex-shrink-0"><i class="fas fa-clipboard-check text-teal-600"></i></div>
+                <div><h4 class="font-semibold text-gray-900">Evaluasi Keberhasilan</h4><p class="text-sm text-gray-500">Evaluasi menyeluruh terhadap indikator keberhasilan proyek termasuk tingkat hidup, pertumbuhan, dan dampak ekologis.</p></div>
+            </div>
+            <div class="modal-feature">
+                <div class="w-8 h-8 bg-teal-100 rounded-lg flex items-center justify-center flex-shrink-0"><i class="fas fa-file-signature text-teal-600"></i></div>
+                <div><h4 class="font-semibold text-gray-900">Pelaporan Dampak</h4><p class="text-sm text-gray-500">Penyusunan laporan berkala mengenai dampak lingkungan, sosial, dan ekonomi dari proyek konservasi.</p></div>
+            </div>
+            <div class="modal-feature">
+                <div class="w-8 h-8 bg-teal-100 rounded-lg flex items-center justify-center flex-shrink-0"><i class="fas fa-people-arrows text-teal-600"></i></div>
+                <div><h4 class="font-semibold text-gray-900">Pemberdayaan Masyarakat</h4><p class="text-sm text-gray-500">Pelatihan dan pemberdayaan masyarakat lokal dalam perawatan mangrove untuk keberlanjutan jangka panjang.</p></div>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection

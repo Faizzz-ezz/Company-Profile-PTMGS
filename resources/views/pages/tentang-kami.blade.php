@@ -177,7 +177,7 @@ $config = [
             <div class="w-56 h-56 bg-white rounded-2xl shadow-lg flex items-center justify-center p-4 card-hover">
                 <div class="text-center">
                     <img src="{{ asset('assets/logo/logo6.png') }}" alt="Logo 4" class="w-36 h-36 object-contain mx-auto mb-2">
-                    <p class="text-sm text-gray-700 font-semibold">PT Nambi Jaya</p>
+                    <p class="text-sm text-gray-700 font-semibold">We-hasta</p>
                 </div>
             </div>
             <div class="w-56 h-56 bg-white rounded-2xl shadow-lg flex items-center justify-center p-4 card-hover">
@@ -189,7 +189,7 @@ $config = [
             <div class="w-56 h-56 bg-white rounded-2xl shadow-lg flex items-center justify-center p-4 card-hover">
                 <div class="text-center">
                     <img src="{{ asset('assets/logo/logo8.png') }}" alt="Logo 4" class="w-36 h-36 object-contain mx-auto mb-2">
-                    <p class="text-sm text-gray-700 font-semibold">Wihasta</p>
+                    <p class="text-sm text-gray-700 font-semibold">PT Nambi Jaya</p>
                 </div>
             </div>
         </div>
@@ -206,7 +206,7 @@ $config = [
                 <i class="fas fa-users text-mangrove-600"></i>
                 <span class="text-sm font-medium text-mangrove-700">Tim Kami</span>
             </div>
-            <h2 class="text-3xl font-bold text-gray-900 mb-4">Struktur Organisasi</h2>
+            <h2 class="text-3xl font-bold text-gray-900 mb-4">Jajaran Direktur</h2>
             <p class="text-gray-600 max-w-2xl mx-auto">Tim profesional yang berpengalaman di bidang konservasi mangrove.</p>
         </div>
         
