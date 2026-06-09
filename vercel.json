@@ -7,7 +7,19 @@
     "routes": [
         {
             "src": "/build/(.*)",
-            "dest": "/public/assets/"
+            "dest": "/public/assets/foto"
+        },
+        {
+            "src": "/build/(.*)",
+            "dest": "/public/assets/galeri"
+        },
+        {
+            "src": "/build/(.*)",
+            "dest": "/public/assets/logo"
+        },
+        {
+            "src": "/build/(.*)",
+            "dest": "/public/assets/mangrove"
         },
         {
             "src": "/css/(.*)",
