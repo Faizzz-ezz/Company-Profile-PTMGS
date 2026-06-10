@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\ContactController;
-use App\Http\Controllers\VideoController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\File;
 
@@ -41,6 +40,4 @@ Route::get('/hubungi-kami', function () {
 })->name('hubungi-kami');
 
 Route::post('/hubungi-kami/kirim', [ContactController::class, 'sendMessage'])->name('hubungi-kami.kirim');
-Route::get('/galeri-video', [VideoController::class, 'index'])->name('galeri-video');
-Route::post('/galeri-video/upload', [VideoController::class, 'upload'])->name('video.upload');
-Route::delete('/galeri-video/{filename}', [VideoController::class, 'destroy'])->name('video.destroy');
+

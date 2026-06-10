@@ -161,9 +161,6 @@ $config = [
                     <a href="{{ route('perawatan') }}" class="px-4 py-2 rounded-xl text-sm font-medium {{ Request::is('perawatan') ? 'bg-mangrove-100 text-mangrove-700' : 'text-gray-600 hover:bg-gray-100' }} smooth-transition">
                         <i class="fas fa-hand-holding-heart mr-2"></i>Perawatan
                     </a>
-                    <a href="{{ route('galeri-video') }}" class="px-4 py-2 rounded-xl text-sm font-medium {{ Request::is('galeri-video') ? 'bg-mangrove-100 text-mangrove-700' : 'text-gray-600 hover:bg-gray-100' }} smooth-transition">
-                        <i class="fas fa-video mr-2"></i>Video
-                    </a>
                     <a href="{{ route('hubungi-kami') }}" class="ml-2 px-6 py-2.5 bg-gradient-to-r from-mangrove-600 to-mangrove-700 text-white text-sm font-semibold rounded-full hover:shadow-lg hover:shadow-mangrove-500/30 btn-glow smooth-transition">
                         <i class="fas fa-phone mr-2"></i>Hubungi Kami
                     </a>
@@ -193,9 +190,6 @@ $config = [
                 </a>
                 <a href="{{ route('perawatan') }}" class="px-4 py-3 rounded-xl text-sm font-medium {{ Request::is('perawatan') ? 'bg-mangrove-100 text-mangrove-700' : 'text-gray-600 hover:bg-gray-100' }} smooth-transition">
                     <i class="fas fa-hand-holding-heart mr-3"></i>Perawatan
-                </a>
-                <a href="{{ route('galeri-video') }}" class="px-4 py-3 rounded-xl text-sm font-medium {{ Request::is('galeri-video') ? 'bg-mangrove-100 text-mangrove-700' : 'text-gray-600 hover:bg-gray-100' }} smooth-transition">
-                    <i class="fas fa-video mr-3"></i>Video
                 </a>
                 <a href="{{ route('hubungi-kami') }}" class="mt-2 px-4 py-3 bg-gradient-to-r from-mangrove-600 to-mangrove-700 text-white text-sm font-semibold rounded-xl text-center">
                     <i class="fas fa-phone mr-2"></i>Hubungi Kami
