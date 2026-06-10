@@ -161,6 +161,9 @@ $config = [
                     <a href="{{ route('perawatan') }}" class="px-4 py-2 rounded-xl text-sm font-medium {{ Request::is('perawatan') ? 'bg-mangrove-100 text-mangrove-700' : 'text-gray-600 hover:bg-gray-100' }} smooth-transition">
                         <i class="fas fa-hand-holding-heart mr-2"></i>Perawatan
                     </a>
+                    <a href="{{ route('galeri-video') }}" class="px-4 py-2 rounded-xl text-sm font-medium {{ Request::is('galeri-video') ? 'bg-mangrove-100 text-mangrove-700' : 'text-gray-600 hover:bg-gray-100' }} smooth-transition">
+                        <i class="fas fa-video mr-2"></i>Video
+                    </a>
                     <a href="{{ route('hubungi-kami') }}" class="ml-2 px-6 py-2.5 bg-gradient-to-r from-mangrove-600 to-mangrove-700 text-white text-sm font-semibold rounded-full hover:shadow-lg hover:shadow-mangrove-500/30 btn-glow smooth-transition">
                         <i class="fas fa-phone mr-2"></i>Hubungi Kami
                     </a>
@@ -191,6 +194,9 @@ $config = [
                 <a href="{{ route('perawatan') }}" class="px-4 py-3 rounded-xl text-sm font-medium {{ Request::is('perawatan') ? 'bg-mangrove-100 text-mangrove-700' : 'text-gray-600 hover:bg-gray-100' }} smooth-transition">
                     <i class="fas fa-hand-holding-heart mr-3"></i>Perawatan
                 </a>
+                <a href="{{ route('galeri-video') }}" class="px-4 py-3 rounded-xl text-sm font-medium {{ Request::is('galeri-video') ? 'bg-mangrove-100 text-mangrove-700' : 'text-gray-600 hover:bg-gray-100' }} smooth-transition">
+                    <i class="fas fa-video mr-3"></i>Video
+                </a>
                 <a href="{{ route('hubungi-kami') }}" class="mt-2 px-4 py-3 bg-gradient-to-r from-mangrove-600 to-mangrove-700 text-white text-sm font-semibold rounded-xl text-center">
                     <i class="fas fa-phone mr-2"></i>Hubungi Kami
                 </a>
@@ -208,8 +214,8 @@ $config = [
         <div class="absolute inset-0 opacity-5" style="background-image: url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'1\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
         
         <div class="max-w-7xl mx-auto px-6 py-16 relative z-10">
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
-                <div class="lg:col-span-1">
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-10 mb-12">
+                <div>
                     <div class="flex items-center gap-3 mb-6">
                         @if($config['logo'])
                             <img src="{{ asset('assets/logo/' . $config['logo']) }}" alt="Logo" class="w-12 h-12 rounded-2xl object-cover">
@@ -271,27 +277,7 @@ $config = [
                         </li>
                     </ul>
                 </div>
-                <div>
-                    <h4 class="font-bold mb-6 flex items-center gap-2">
-                        <i class="fas fa-newspaper text-mangrove-500"></i>
-                        Newsletter
-                    </h4>
-                    <p class="text-gray-400 text-sm mb-4">Dapatkan update terbaru tentang konservasi mangrove.</p>
-                    @if (session('success'))
-                        <div class="bg-green-800/50 border border-green-600 text-green-200 px-4 py-3 rounded-xl mb-4 text-sm flex items-center gap-2">
-                            <i class="fas fa-check-circle"></i>
-                            <span>{{ session('success') }}</span>
-                        </div>
-                    @endif
-                    <form method="POST" action="{{ route('newsletter.berlangganan') }}" class="flex gap-2">
-                        @csrf
-                        <input type="email" name="email" placeholder="Email Anda" class="flex-1 px-4 py-3 bg-white/10 rounded-xl border border-white/20 text-white text-sm focus:outline-none focus:border-mangrove-500 @error('email') border-red-400 @enderror">
-                        <button type="submit" class="px-4 py-3 bg-mangrove-600 rounded-xl hover:bg-mangrove-700 smooth-transition">
-                            <i class="fas fa-paper-plane"></i>
-                        </button>
-                    </form>
-                    @error('email') <p class="text-red-400 text-xs mt-2">{{ $message }}</p> @enderror
-                </div>
+
             </div>
             <div class="border-t border-white/10 pt-8 text-center">
                 <p class="text-gray-400 text-sm">© {{ date('Y') }} <span class="text-white font-semibold">PT Morton Global Sejahtera</span>. All rights reserved.</p>

@@ -172,6 +172,68 @@ $config = [
             </div>
         </div>
         
+        <!-- Fungsi Mangrove -->
+        <div class="mb-20">
+            <div class="text-center mb-12">
+                <div class="inline-flex items-center gap-2 px-4 py-2 bg-mangrove-100 rounded-full mb-4">
+                    <i class="fas fa-tasks text-mangrove-600"></i>
+                    <span class="text-sm font-medium text-mangrove-700">Manfaat Ekosistem</span>
+                </div>
+                <h3 class="text-3xl font-bold text-gray-900">Fungsi <span class="text-gradient">Mangrove</span></h3>
+                <p class="text-gray-500 mt-3">Berbagai fungsi penting hutan mangrove bagi lingkungan dan kehidupan</p>
+            </div>
+            <div class="grid md:grid-cols-4 gap-6">
+                <div class="bg-white rounded-2xl p-6 shadow-lg border border-gray-100 card-hover group text-center">
+                    <div class="w-16 h-16 bg-gradient-to-br from-mangrove-500 to-mangrove-600 rounded-2xl flex items-center justify-center mx-auto mb-5 group-hover:scale-110 smooth-transition shadow-lg">
+                        <i class="fas fa-globe-asia text-white text-2xl"></i>
+                    </div>
+                    <h4 class="text-lg font-bold text-gray-900 mb-3">Fungsi Ekologis</h4>
+                    <ul class="text-sm text-gray-600 space-y-2 text-left">
+                        <li class="flex items-start gap-2"><i class="fas fa-check-circle text-mangrove-500 mt-0.5"></i>Habitat biota laut dan darat</li>
+                        <li class="flex items-start gap-2"><i class="fas fa-check-circle text-mangrove-500 mt-0.5"></i>Penyerap karbon (blue carbon)</li>
+                        <li class="flex items-start gap-2"><i class="fas fa-check-circle text-mangrove-500 mt-0.5"></i>Penghasil oksigen</li>
+                        <li class="flex items-start gap-2"><i class="fas fa-check-circle text-mangrove-500 mt-0.5"></i>Daur ulang nutrisi perairan</li>
+                    </ul>
+                </div>
+                <div class="bg-white rounded-2xl p-6 shadow-lg border border-gray-100 card-hover group text-center">
+                    <div class="w-16 h-16 bg-gradient-to-br from-ocean-500 to-ocean-600 rounded-2xl flex items-center justify-center mx-auto mb-5 group-hover:scale-110 smooth-transition shadow-lg">
+                        <i class="fas fa-shield-alt text-white text-2xl"></i>
+                    </div>
+                    <h4 class="text-lg font-bold text-gray-900 mb-3">Fungsi Fisik</h4>
+                    <ul class="text-sm text-gray-600 space-y-2 text-left">
+                        <li class="flex items-start gap-2"><i class="fas fa-check-circle text-ocean-500 mt-0.5"></i>Pelindung pantai dari abrasi</li>
+                        <li class="flex items-start gap-2"><i class="fas fa-check-circle text-ocean-500 mt-0.5"></i>Penahan gelombang & tsunami</li>
+                        <li class="flex items-start gap-2"><i class="fas fa-check-circle text-ocean-500 mt-0.5"></i>Pencegah intrusi air laut</li>
+                        <li class="flex items-start gap-2"><i class="fas fa-check-circle text-ocean-500 mt-0.5"></i>Penjernih air alami</li>
+                    </ul>
+                </div>
+                <div class="bg-white rounded-2xl p-6 shadow-lg border border-gray-100 card-hover group text-center">
+                    <div class="w-16 h-16 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-2xl flex items-center justify-center mx-auto mb-5 group-hover:scale-110 smooth-transition shadow-lg">
+                        <i class="fas fa-coins text-white text-2xl"></i>
+                    </div>
+                    <h4 class="text-lg font-bold text-gray-900 mb-3">Fungsi Ekonomis</h4>
+                    <ul class="text-sm text-gray-600 space-y-2 text-left">
+                        <li class="flex items-start gap-2"><i class="fas fa-check-circle text-emerald-500 mt-0.5"></i>Sumber kayu & bahan bangunan</li>
+                        <li class="flex items-start gap-2"><i class="fas fa-check-circle text-emerald-500 mt-0.5"></i>Bahan baku industri (tanin)</li>
+                        <li class="flex items-start gap-2"><i class="fas fa-check-circle text-emerald-500 mt-0.5"></i>Ekowisata & edukasi</li>
+                        <li class="flex items-start gap-2"><i class="fas fa-check-circle text-emerald-500 mt-0.5"></i>Budidaya perikanan (silvofishery)</li>
+                    </ul>
+                </div>
+                <div class="bg-white rounded-2xl p-6 shadow-lg border border-gray-100 card-hover group text-center">
+                    <div class="w-16 h-16 bg-gradient-to-br from-teal-500 to-teal-600 rounded-2xl flex items-center justify-center mx-auto mb-5 group-hover:scale-110 smooth-transition shadow-lg">
+                        <i class="fas fa-users text-white text-2xl"></i>
+                    </div>
+                    <h4 class="text-lg font-bold text-gray-900 mb-3">Fungsi Sosial</h4>
+                    <ul class="text-sm text-gray-600 space-y-2 text-left">
+                        <li class="flex items-start gap-2"><i class="fas fa-check-circle text-teal-500 mt-0.5"></i>Lapangan kerja masyarakat pesisir</li>
+                        <li class="flex items-start gap-2"><i class="fas fa-check-circle text-teal-500 mt-0.5"></i>Laboratorium alam & penelitian</li>
+                        <li class="flex items-start gap-2"><i class="fas fa-check-circle text-teal-500 mt-0.5"></i>Objek pendidikan lingkungan</li>
+                        <li class="flex items-start gap-2"><i class="fas fa-check-circle text-teal-500 mt-0.5"></i>Warisan budaya & kearifan lokal</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
         <!-- Detail Cards -->
         <div class="grid md:grid-cols-2 gap-8">
             <div class="bg-gray-50 rounded-3xl overflow-hidden shadow-lg card-hover group">

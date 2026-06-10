@@ -1,10 +1,23 @@
 <?php
 
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\VideoController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\File;
 
 Route::get('/', function () {
-    return view('pages.beranda');
+    $videos = [];
+    $files = File::files(public_path('assets/video'));
+    foreach ($files as $file) {
+        $ext = strtolower($file->getExtension());
+        if (in_array($ext, ['mp4', 'webm', 'ogg', 'mov', 'avi'])) {
+            $videos[] = [
+                'name' => $file->getFilename(),
+                'path' => 'assets/video/' . $file->getFilename(),
+            ];
+        }
+    }
+    return view('pages.beranda', compact('videos'));
 })->name('beranda');
 
 Route::get('/tentang-kami', function () {
@@ -28,4 +41,6 @@ Route::get('/hubungi-kami', function () {
 })->name('hubungi-kami');
 
 Route::post('/hubungi-kami/kirim', [ContactController::class, 'sendMessage'])->name('hubungi-kami.kirim');
-Route::post('/newsletter/berlangganan', [ContactController::class, 'subscribe'])->name('newsletter.berlangganan');
+Route::get('/galeri-video', [VideoController::class, 'index'])->name('galeri-video');
+Route::post('/galeri-video/upload', [VideoController::class, 'upload'])->name('video.upload');
+Route::delete('/galeri-video/{filename}', [VideoController::class, 'destroy'])->name('video.destroy');
