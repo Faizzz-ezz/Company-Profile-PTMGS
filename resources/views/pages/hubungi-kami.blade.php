@@ -138,6 +138,9 @@ $config = [
                     </h3>
                     <p class="text-green-100 text-sm mb-6">Bergabunglah dengan kami dalam upaya pelestarian ekosistem mangrove Indonesia untuk masa depan yang lebih hijau.</p>
                     <div class="flex gap-3">
+                        <a href="https://wa.me/6281333885876" class="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center hover:bg-white/30 smooth-transition">
+                            <i class="fab fa-whatsapp text-lg"></i>
+                        </a>
                         <a href="#" class="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center hover:bg-white/30 smooth-transition">
                             <i class="fab fa-instagram"></i>
                         </a>

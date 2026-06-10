@@ -226,7 +226,11 @@ $config = [
                         </div>
                     </div>
                     <p class="text-gray-400 text-sm leading-relaxed mb-6">Mitra terpercaya dalam pelestarian dan pengembangan ekosistem mangrove Indonesia untuk generasi mendatang.</p>
+                    
                     <div class="flex gap-3">
+                        <a href="https://wa.me/6281333885876" class="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center hover:bg-mangrove-600 smooth-transition">
+                            <i class="fab fa-whatsapp text-lg"></i>
+                        </a>
                         <a href="#" class="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center hover:bg-mangrove-600 smooth-transition">
                             <i class="fab fa-instagram text-lg"></i>
                         </a>
