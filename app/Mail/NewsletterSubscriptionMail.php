@@ -2,7 +2,6 @@
 
 namespace App\Mail;
 
-use App\Models\NewsletterSubscriber;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
@@ -13,17 +12,17 @@ class NewsletterSubscriptionMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public NewsletterSubscriber $subscriber;
+    public string $email;
 
-    public function __construct(NewsletterSubscriber $subscriber)
+    public function __construct(string $email)
     {
-        $this->subscriber = $subscriber;
+        $this->email = $email;
     }
 
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Terima Kasih Telah Berlangganan Newsletter',
+            subject: 'Pendaftar Newsletter Baru',
         );
     }
 

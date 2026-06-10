@@ -8,7 +8,7 @@
 <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; padding: 20px;">
     <h2 style="color: #2563eb;">Terima Kasih Telah Berlangganan!</h2>
 
-    <p>Halo, <strong>{{ $subscriber->email }}</strong></p>
+    <p>Halo, <strong>{{ $email }}</strong></p>
 
     <p>Terima kasih telah berlangganan newsletter kami. Anda akan menerima informasi terbaru seputar:</p>
 
