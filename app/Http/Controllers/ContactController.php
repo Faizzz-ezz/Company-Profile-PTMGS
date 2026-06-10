@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ContactMessageMail;
+use App\Mail\NewsletterSubscriptionMail;
 use App\Models\ContactMessage;
 use App\Models\NewsletterSubscriber;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class ContactController extends Controller
 {
@@ -18,7 +21,9 @@ class ContactController extends Controller
             'message' => 'required|string',
         ]);
 
-        ContactMessage::create($validated);
+        $contactMessage = ContactMessage::create($validated);
+
+        Mail::to('muhammadfaizulumam4@gmail.com')->send(new ContactMessageMail($contactMessage));
 
         return back()->with('success', 'Pesan Anda berhasil dikirim. Kami akan menghubungi Anda segera.');
     }
@@ -29,7 +34,9 @@ class ContactController extends Controller
             'email' => 'required|email|max:255|unique:newsletter_subscribers,email',
         ]);
 
-        NewsletterSubscriber::create($validated);
+        $subscriber = NewsletterSubscriber::create($validated);
+
+        Mail::to('muhammadfaizulumam4@gmail.com')->send(new NewsletterSubscriptionMail($subscriber));
 
         return back()->with('success', 'Terima kasih! Anda telah berlangganan newsletter kami.');
     }
